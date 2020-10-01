@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Firebase Basic Example</title>
+  <!-- including FusionCharts core package JS files -->
+  <script src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- including Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+  <script src="assets/scripts/app.js"></script>
+  <script>
+    window.addEventListener("load", getData(genFunction));
+	window.cdata = [];
+    function getData(callbackIN) {
+      var ref = firebase.database().ref("data_test_1");
+      ref.once('value').then(function (snapshot) {
+        callbackIN(snapshot.val());
+		
+      });
+    }
+	
+    function genFunction(data) {
+		//console.log(data);
+      
+		var output = [], item;
+
+		for (var type in data) {
+			item = {};
+			item.type = type;
+			item.name = data[type];
+			output.push(item);
+		}
+
+// display result
+		//document.write(JSON.stringify(output));
+	  
+      var len = output.length;
+	  //console.log(len);
+	  //console.log(output[0]);
+      for(var i=0; i<len; i++) {
+	  var d = new Date(output[i]['name']['Time']*1000);
+	  //var d = moment(output[i]['name']['Time']).format("DD-MM-YYYY h:mm:ss");
+        window.cdata.push({
+			
+          label: d,
+          value: output[i]['name']['dbp']
+        });
+		
+      }
+console.log(window.cdata);
+	//console.log(window.cdata);
+    var firebaseChart = new FusionCharts({
+        type: 'area2d',
+        renderAt: 'chart-container',
+        width: '650',
+        height: '400',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": {
+                "caption": "dbp vs Time",
+                "subCaption": "Last 7 Days{br}ACME Inc.",
+                "subCaptionFontBold": "0",
+                "captionFontSize": "20",
+                "subCaptionFontSize": "17",
+                "captionPadding": "15",
+                "captionFontColor": "#8C8C8C",
+                "baseFontSize": "14",
+                "baseFont": "Barlow",
+                "canvasBgAlpha": "0",
+                "bgColor": "#FFFFFF",
+                "bgAlpha": "100",
+                "showBorder": "0",
+                "showCanvasBorder": "0",
+                "showPlotBorder": "0",
+                "showAlternateHGridColor": "0",
+                "usePlotGradientColor": "0",
+                "paletteColors": "#6AC1A5",
+                "showValues": "0",
+                "divLineAlpha": "5",
+                "showAxisLines": "1",
+                "drawAnchors": "0",
+                "xAxisLineColor": "#8C8C8C",
+                "xAxisLineThickness": "0.7",
+                "xAxisLineAlpha": "50",
+                "yAxisLineColor": "#8C8C8C",
+                "yAxisLineThickness": "0.7",
+                "yAxisLineAlpha": "50",
+                "baseFontColor": "#8C8C8C",
+                "toolTipBgColor": "#FA8D67",
+                "toolTipPadding": "10",
+                "toolTipColor": "#FFFFFF",
+                "toolTipBorderRadius": "3",
+                "toolTipBorderAlpha": "0",
+                "drawCrossLine": "1",
+                "crossLineColor": "#8C8C8C",
+                "crossLineAlpha": "60",
+                "crossLineThickness": "0.7",
+                "alignCaptionWithCanvas": "1"
+            },
+            "data": window.cdata
+        }
+    });
+
+    firebaseChart.render();
+
+    }
+
+  </script>
+</head>
+
+<body>
+  <div id="chart-container"></div>
+</body>
+
+</html>
