@@ -43,7 +43,10 @@
   ![Heart Attack correlation matrix](https://github.com/pradeep98/Remote-Healthcare-Diagnosis-System/blob/master/RemoteHealthCareSystem/correlation_undersample522019.png?raw=true)
   
    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  Cardiac Risk Correlation Matrix
-  
+
+### Final Results:
+
+  ![Heart Attack correlation matrix](https://github.com/pradeep98/Remote-Healthcare-Diagnosis-System/blob/master/RemoteHealthCareSystem/FinalCumResult.PNG?raw=true)
 
 ### Dataset: [Kaggle Pima Indian Diabetes](https://www.kaggle.com/uciml/pima-indians-diabetes-database)
 
