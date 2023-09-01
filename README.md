@@ -23,7 +23,7 @@
  <ul>
   <li>Blood pressure depends on various factors like glucose level, heart rate, BMI, age. </li>
    <li>All these factors are used to estimate the systolic and diastolic blood pressure using Linear Regression.</li></ul>
-    <ul> Liner Regression Error:
+    <ul> Linear Regression Error:
        <li> Diastolic BP: 10.75</li>
        <li> Systolic BP: 18.99</li></ul>
    
